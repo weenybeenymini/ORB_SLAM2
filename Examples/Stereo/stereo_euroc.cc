@@ -47,6 +47,7 @@ int main(int argc, char **argv)
     vector<string> vstrImageLeft;
     vector<string> vstrImageRight;
     vector<double> vTimeStamp;
+    cout << string(argv[3]) << "\n";
     LoadImages(string(argv[3]), string(argv[4]), string(argv[5]), vstrImageLeft, vstrImageRight, vTimeStamp);
 
     if(vstrImageLeft.empty() || vstrImageRight.empty())
@@ -134,8 +135,15 @@ int main(int argc, char **argv)
             return 1;
         }
 
+        // 이부분이 화면 이상하게 만드는 부분같은데
         cv::remap(imLeft,imLeftRect,M1l,M2l,cv::INTER_LINEAR);
         cv::remap(imRight,imRightRect,M1r,M2r,cv::INTER_LINEAR);
+
+        // flip(imLeft.t(), imLeftRect, 0);
+        // flip(imRight.t(), imRightRect, 0);
+
+        // imLeftRect = imLeft;
+        // imRightRect = imRight;
 
         double tframe = vTimeStamp[ni];
 
@@ -193,6 +201,7 @@ int main(int argc, char **argv)
 void LoadImages(const string &strPathLeft, const string &strPathRight, const string &strPathTimes,
                 vector<string> &vstrImageLeft, vector<string> &vstrImageRight, vector<double> &vTimeStamps)
 {
+    int i = 1;
     ifstream fTimes;
     fTimes.open(strPathTimes.c_str());
     vTimeStamps.reserve(5000);
@@ -206,12 +215,11 @@ void LoadImages(const string &strPathLeft, const string &strPathRight, const str
         {
             stringstream ss;
             ss << s;
-            vstrImageLeft.push_back(strPathLeft + "/" + ss.str() + ".png");
-            vstrImageRight.push_back(strPathRight + "/" + ss.str() + ".png");
+            vstrImageLeft.push_back(strPathLeft + "/" + to_string(i) + ".png");
+            vstrImageRight.push_back(strPathRight + "/" + to_string(i++) + ".png");
             double t;
             ss >> t;
             vTimeStamps.push_back(t/1e9);
-
         }
     }
 }

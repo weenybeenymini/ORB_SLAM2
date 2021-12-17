@@ -267,6 +267,42 @@ cv::Mat Tracking::GrabImageMonocular(const cv::Mat &im, const double &timestamp)
 
 void Tracking::Track()
 {
+    vector<KeyFrame*> allKeyFrames = mpMap->GetAllKeyFrames();
+    int akfn = allKeyFrames.size();
+
+    cout << akfn << "\n";
+
+    for(int i =0; i<akfn; i++)
+    {
+        cout << "keyframe ID: "<< allKeyFrames[i]->mnId << "\n";
+        
+        cout << "# keypoint: "<< allKeyFrames[i]->N << "\n";
+
+        set<MapPoint*> tempMapPoints = allKeyFrames[i]->GetMapPoints();
+        cout << "# mappoint: "<< tempMapPoints.size() << "\n";
+        
+        //pose
+        cout << "pose: \n" << allKeyFrames[i]->GetPose() << "\n";
+
+        //covisibility graph
+        std::set<KeyFrame *> tempConnectedKeyFrames = allKeyFrames[i]->GetConnectedKeyFrames();
+        int tckfn = tempConnectedKeyFrames.size();
+
+        cout << "connectedKeyFrames Info: ";
+        set<KeyFrame *>::iterator iter;
+        for(iter = tempConnectedKeyFrames.begin(); iter != tempConnectedKeyFrames.end(); iter++){
+            KeyFrame * tempKeyFrame = *iter;
+            cout << "("<< tempKeyFrame->mnId << ", " << allKeyFrames[i]->GetWeight(tempKeyFrame) << ") ";
+        }
+        
+        cout << "\n\n";
+    }
+
+    //to look one frame
+    int temp;
+    cin >> temp;
+
+
     if(mState==NO_IMAGES_YET)
     {
         mState = NOT_INITIALIZED;

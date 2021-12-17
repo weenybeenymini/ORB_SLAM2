@@ -1,0 +1,26 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CheckDistEpipolarLine	ORBmatcher.cc	/^bool ORBmatcher::CheckDistEpipolarLine(const cv::KeyPoint &kp1,const cv::KeyPoint &kp2,const cv::Mat &F12,const KeyFrame* pKF2)$/;"	f	class:ORB_SLAM2::ORBmatcher
+ComputeThreeMaxima	ORBmatcher.cc	/^void ORBmatcher::ComputeThreeMaxima(vector<int>* histo, const int L, int &ind1, int &ind2, int &ind3)$/;"	f	class:ORB_SLAM2::ORBmatcher
+DescriptorDistance	ORBmatcher.cc	/^int ORBmatcher::DescriptorDistance(const cv::Mat &a, const cv::Mat &b)$/;"	f	class:ORB_SLAM2::ORBmatcher
+Fuse	ORBmatcher.cc	/^int ORBmatcher::Fuse(KeyFrame *pKF, const vector<MapPoint *> &vpMapPoints, const float th)$/;"	f	class:ORB_SLAM2::ORBmatcher
+Fuse	ORBmatcher.cc	/^int ORBmatcher::Fuse(KeyFrame *pKF, cv::Mat Scw, const vector<MapPoint *> &vpPoints, float th, vector<MapPoint *> &vpReplacePoint)$/;"	f	class:ORB_SLAM2::ORBmatcher
+HISTO_LENGTH	ORBmatcher.cc	/^const int ORBmatcher::HISTO_LENGTH = 30;$/;"	m	class:ORB_SLAM2::ORBmatcher	file:
+ORB_SLAM2	ORBmatcher.cc	/^namespace ORB_SLAM2$/;"	n	file:
+ORBmatcher	ORBmatcher.cc	/^ORBmatcher::ORBmatcher(float nnratio, bool checkOri): mfNNratio(nnratio), mbCheckOrientation(checkOri)$/;"	f	class:ORB_SLAM2::ORBmatcher
+RadiusByViewingCos	ORBmatcher.cc	/^float ORBmatcher::RadiusByViewingCos(const float &viewCos)$/;"	f	class:ORB_SLAM2::ORBmatcher
+SearchByBoW	ORBmatcher.cc	/^int ORBmatcher::SearchByBoW(KeyFrame *pKF1, KeyFrame *pKF2, vector<MapPoint *> &vpMatches12)$/;"	f	class:ORB_SLAM2::ORBmatcher
+SearchByBoW	ORBmatcher.cc	/^int ORBmatcher::SearchByBoW(KeyFrame* pKF,Frame &F, vector<MapPoint*> &vpMapPointMatches)$/;"	f	class:ORB_SLAM2::ORBmatcher
+SearchByProjection	ORBmatcher.cc	/^int ORBmatcher::SearchByProjection(Frame &CurrentFrame, KeyFrame *pKF, const set<MapPoint*> &sAlreadyFound, const float th , const int ORBdist)$/;"	f	class:ORB_SLAM2::ORBmatcher
+SearchByProjection	ORBmatcher.cc	/^int ORBmatcher::SearchByProjection(Frame &CurrentFrame, const Frame &LastFrame, const float th, const bool bMono)$/;"	f	class:ORB_SLAM2::ORBmatcher
+SearchByProjection	ORBmatcher.cc	/^int ORBmatcher::SearchByProjection(Frame &F, const vector<MapPoint*> &vpMapPoints, const float th)$/;"	f	class:ORB_SLAM2::ORBmatcher
+SearchByProjection	ORBmatcher.cc	/^int ORBmatcher::SearchByProjection(KeyFrame* pKF, cv::Mat Scw, const vector<MapPoint*> &vpPoints, vector<MapPoint*> &vpMatched, int th)$/;"	f	class:ORB_SLAM2::ORBmatcher
+SearchBySim3	ORBmatcher.cc	/^int ORBmatcher::SearchBySim3(KeyFrame *pKF1, KeyFrame *pKF2, vector<MapPoint*> &vpMatches12,$/;"	f	class:ORB_SLAM2::ORBmatcher
+SearchForInitialization	ORBmatcher.cc	/^int ORBmatcher::SearchForInitialization(Frame &F1, Frame &F2, vector<cv::Point2f> &vbPrevMatched, vector<int> &vnMatches12, int windowSize)$/;"	f	class:ORB_SLAM2::ORBmatcher
+SearchForTriangulation	ORBmatcher.cc	/^int ORBmatcher::SearchForTriangulation(KeyFrame *pKF1, KeyFrame *pKF2, cv::Mat F12,$/;"	f	class:ORB_SLAM2::ORBmatcher
+TH_HIGH	ORBmatcher.cc	/^const int ORBmatcher::TH_HIGH = 100;$/;"	m	class:ORB_SLAM2::ORBmatcher	file:
+TH_LOW	ORBmatcher.cc	/^const int ORBmatcher::TH_LOW = 50;$/;"	m	class:ORB_SLAM2::ORBmatcher	file:
