@@ -1,0 +1,3 @@
+# accelerometer data
+# file: 'rgbd_dataset_freiburg3_nostructure_texture_near_withloop_validation.bag'
+# timestamp ax ay az

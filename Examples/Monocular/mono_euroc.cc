@@ -149,7 +149,7 @@ void LoadImages(const string &strImagePath, const string &strPathTimes,
             vstrImages.push_back(strImagePath + "/" + ss.str() + ".png");
             double t;
             ss >> t;
-            vTimeStamps.push_back(t/1e8);
+            vTimeStamps.push_back(t/1e9);
 
         }
     }
