@@ -43,7 +43,7 @@ class KeyFrameDatabase;
 class KeyFrame
 {
 public:
-    KeyFrame(Frame &F, Map* pMap, KeyFrameDatabase* pKFDB);
+    KeyFrame(Frame &F, Map* pMap, KeyFrameDatabase* pKFDB, string fn);
 
     // Pose functions
     void SetPose(const cv::Mat &Tcw);
@@ -119,6 +119,8 @@ public:
 
     // The following variables are accesed from only 1 thread or never change (no mutex needed).
 public:
+
+    string filename;
 
     static long unsigned int nNextId;
     long unsigned int mnId;
@@ -227,6 +229,8 @@ protected:
     float mHalfBaseline; // Only for visualization
 
     Map* mpMap;
+
+    
 
     std::mutex mMutexPose;
     std::mutex mMutexConnections;

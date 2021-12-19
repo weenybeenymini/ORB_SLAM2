@@ -236,9 +236,10 @@ cv::Mat Tracking::GrabImageRGBD(const cv::Mat &imRGB,const cv::Mat &imD, const d
 }
 
 
-cv::Mat Tracking::GrabImageMonocular(const cv::Mat &im, const double &timestamp)
+cv::Mat Tracking::GrabImageMonocular(const cv::Mat &im, const double &timestamp, const string filename)
 {
     mImGray = im;
+    fn = filename;
 
     if(mImGray.channels()==3)
     {
@@ -270,33 +271,46 @@ void Tracking::Track()
     vector<KeyFrame*> allKeyFrames = mpMap->GetAllKeyFrames();
     int akfn = allKeyFrames.size();
 
-    cout << akfn << "\n";
+    if(akfn > 0){
+        cout << akfn << "\n";
 
-    for(int i =0; i<akfn; i++)
-    {
-        cout << "keyframe ID: "<< allKeyFrames[i]->mnId << "\n";
-        
-        cout << "# keypoint: "<< allKeyFrames[i]->N << "\n";
+        for(int i =0; i<akfn; i++)
+        {
+            cout << "filename: "<< allKeyFrames[i]->filename << "\n";
 
-        set<MapPoint*> tempMapPoints = allKeyFrames[i]->GetMapPoints();
-        cout << "# mappoint: "<< tempMapPoints.size() << "\n";
-        
-        //pose
-        cout << "pose: \n" << allKeyFrames[i]->GetPose() << "\n";
+            cout << "keyframe ID: "<< allKeyFrames[i]->mnId << "\n";
+            
+            cout << "# keypoint: "<< allKeyFrames[i]->N << "\n";
 
-        //covisibility graph
-        std::set<KeyFrame *> tempConnectedKeyFrames = allKeyFrames[i]->GetConnectedKeyFrames();
-        int tckfn = tempConnectedKeyFrames.size();
+            set<MapPoint*> tempMapPoints = allKeyFrames[i]->GetMapPoints();
+            cout << "# mappoint: "<< tempMapPoints.size() << "\n";
+            
+            //pose
+            cout << "pose: \n" << allKeyFrames[i]->GetPose() << "\n";
 
-        cout << "connectedKeyFrames Info: ";
-        set<KeyFrame *>::iterator iter;
-        for(iter = tempConnectedKeyFrames.begin(); iter != tempConnectedKeyFrames.end(); iter++){
-            KeyFrame * tempKeyFrame = *iter;
-            cout << "("<< tempKeyFrame->mnId << ", " << allKeyFrames[i]->GetWeight(tempKeyFrame) << ") ";
+            //covisibility graph
+            //std::set<KeyFrame *> tempConnectedKeyFrames = allKeyFrames[i]->GetConnectedKeyFrames();
+            // cout << "connectedKeyFrames Info: ";
+            // set<KeyFrame *>::iterator iter;
+            //
+            // for(iter = tempConnectedKeyFrames.begin(); iter != tempConnectedKeyFrames.end(); iter++){
+            //     KeyFrame * tempKeyFrame = *iter;
+            //     cout << "("<< tempKeyFrame->mnId << ", " << allKeyFrames[i]->GetWeight(tempKeyFrame) << ") ";
+            // }
+
+            //covisibility graph
+            vector<KeyFrame *> tempConnectedKeyFrames = allKeyFrames[i]->GetCovisiblesByWeight(100);
+            int tckfn = tempConnectedKeyFrames.size();
+            cout << "covisibility KeyFrames Info: ";
+
+            for(int j =0; j<tckfn; j++){
+                cout << "("<< tempConnectedKeyFrames[j]->mnId << ", " << allKeyFrames[i]->GetWeight(tempConnectedKeyFrames[j]) << ") ";
+            }
+            
+            cout << "\n\n";
         }
-        
-        cout << "\n\n";
     }
+    
 
     //to look one frame
     // int temp;
@@ -551,7 +565,7 @@ void Tracking::StereoInitialization()
         mCurrentFrame.SetPose(cv::Mat::eye(4,4,CV_32F));
 
         // Create KeyFrame
-        KeyFrame* pKFini = new KeyFrame(mCurrentFrame,mpMap,mpKeyFrameDB);
+        KeyFrame* pKFini = new KeyFrame(mCurrentFrame,mpMap,mpKeyFrameDB, fn);
 
         // Insert KeyFrame in the map
         mpMap->AddKeyFrame(pKFini);
@@ -674,8 +688,8 @@ void Tracking::MonocularInitialization()
 void Tracking::CreateInitialMapMonocular()
 {
     // Create KeyFrames
-    KeyFrame* pKFini = new KeyFrame(mInitialFrame,mpMap,mpKeyFrameDB);
-    KeyFrame* pKFcur = new KeyFrame(mCurrentFrame,mpMap,mpKeyFrameDB);
+    KeyFrame* pKFini = new KeyFrame(mInitialFrame,mpMap,mpKeyFrameDB, fn);
+    KeyFrame* pKFcur = new KeyFrame(mCurrentFrame,mpMap,mpKeyFrameDB, fn);
 
 
     pKFini->ComputeBoW();
@@ -1104,7 +1118,7 @@ void Tracking::CreateNewKeyFrame()
     if(!mpLocalMapper->SetNotStop(true))
         return;
 
-    KeyFrame* pKF = new KeyFrame(mCurrentFrame,mpMap,mpKeyFrameDB);
+    KeyFrame* pKF = new KeyFrame(mCurrentFrame,mpMap,mpKeyFrameDB, fn);
 
     mpReferenceKF = pKF;
     mCurrentFrame.mpReferenceKF = pKF;
