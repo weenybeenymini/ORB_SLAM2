@@ -344,8 +344,9 @@ bool LoopClosing::ComputeSim3()
 
     if(!bMatch)
     {
-        for(int i=0; i<nInitialCandidates; i++)
-             mvpEnoughConsistentCandidates[i]->SetErase();
+        for(int i=0; i<nInitialCandidates; i++){
+            mvpEnoughConsistentCandidates[i]->SetErase();
+        }
         mpCurrentKF->SetErase();
         return false;
     }
@@ -385,15 +386,18 @@ bool LoopClosing::ComputeSim3()
 
     if(nTotalMatches>=40)
     {
-        for(int i=0; i<nInitialCandidates; i++)
-            if(mvpEnoughConsistentCandidates[i]!=mpMatchedKF)
+        for(int i=0; i<nInitialCandidates; i++){
+            if(mvpEnoughConsistentCandidates[i]!=mpMatchedKF){
                 mvpEnoughConsistentCandidates[i]->SetErase();
+            }
+        }
         return true;
     }
     else
     {
-        for(int i=0; i<nInitialCandidates; i++)
+        for(int i=0; i<nInitialCandidates; i++){
             mvpEnoughConsistentCandidates[i]->SetErase();
+        }
         mpCurrentKF->SetErase();
         return false;
     }

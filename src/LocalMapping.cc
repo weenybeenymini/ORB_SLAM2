@@ -165,6 +165,7 @@ void LocalMapping::ProcessNewKeyFrame()
     mpCurrentKeyFrame->UpdateConnections();
 
     // Insert Keyframe in Map
+    cout << "LocalMapping::ProcessNewKeyFrame()\t";
     mpMap->AddKeyFrame(mpCurrentKeyFrame);
 }
 
@@ -691,8 +692,10 @@ void LocalMapping::KeyFrameCulling()
             }
         }  
 
-        if(nRedundantObservations>0.9*nMPs)
+        if(nRedundantObservations>0.9*nMPs){
+            cout << "LocalMapping::KeyFrameCulling()\t\t";
             pKF->SetBadFlag();
+        }
     }
 }
 

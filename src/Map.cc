@@ -33,6 +33,7 @@ void Map::AddKeyFrame(KeyFrame *pKF)
 {
     unique_lock<mutex> lock(mMutexMap);
     mspKeyFrames.insert(pKF);
+    cout << "AddKeyFrame: " << pKF->mnId << "\n";
     if(pKF->mnId>mnMaxKFid)
         mnMaxKFid=pKF->mnId;
 }
@@ -55,6 +56,7 @@ void Map::EraseMapPoint(MapPoint *pMP)
 void Map::EraseKeyFrame(KeyFrame *pKF)
 {
     unique_lock<mutex> lock(mMutexMap);
+    cout << "EraseKeyFrame: " << pKF->mnId << "\n";
     mspKeyFrames.erase(pKF);
 
     // TODO: This only erase the pointer.

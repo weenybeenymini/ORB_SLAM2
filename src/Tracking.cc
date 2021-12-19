@@ -682,7 +682,9 @@ void Tracking::CreateInitialMapMonocular()
     pKFcur->ComputeBoW();
 
     // Insert KFs in the map
+    cout << "\nTracking::CreateInitialMapMonocular():\t";
     mpMap->AddKeyFrame(pKFini);
+    cout << "Tracking::CreateInitialMapMonocular():\t";
     mpMap->AddKeyFrame(pKFcur);
 
     // Create MapPoints and asscoiate to keyframes
