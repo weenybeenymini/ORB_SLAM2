@@ -239,6 +239,7 @@ cv::Mat Tracking::GrabImageRGBD(const cv::Mat &imRGB,const cv::Mat &imD, const d
 cv::Mat Tracking::GrabImageMonocular(const cv::Mat &im, const double &timestamp, const string filename)
 {
     mImGray = im;
+    rfn = fn;
     fn = filename;
 
     if(mImGray.channels()==3)
@@ -288,7 +289,7 @@ void Tracking::Track()
             //pose
             cout << "pose: \n" << allKeyFrames[i]->GetPose() << "\n";
 
-            //covisibility graph
+            //connected graph
             //std::set<KeyFrame *> tempConnectedKeyFrames = allKeyFrames[i]->GetConnectedKeyFrames();
             // cout << "connectedKeyFrames Info: ";
             // set<KeyFrame *>::iterator iter;
@@ -313,8 +314,8 @@ void Tracking::Track()
     
 
     //to look one frame
-    // int temp;
-    // cin >> temp;
+    char ch;
+    gets(&ch);
 
 
     if(mState==NO_IMAGES_YET)
@@ -688,7 +689,7 @@ void Tracking::MonocularInitialization()
 void Tracking::CreateInitialMapMonocular()
 {
     // Create KeyFrames
-    KeyFrame* pKFini = new KeyFrame(mInitialFrame,mpMap,mpKeyFrameDB, fn);
+    KeyFrame* pKFini = new KeyFrame(mInitialFrame,mpMap,mpKeyFrameDB, rfn);
     KeyFrame* pKFcur = new KeyFrame(mCurrentFrame,mpMap,mpKeyFrameDB, fn);
 
 

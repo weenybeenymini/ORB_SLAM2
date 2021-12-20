@@ -215,7 +215,8 @@ protected:
 
     list<MapPoint*> mlpTemporalPoints;
 
-    string fn;
+    string fn = "t.png";
+    string rfn;
 };
 
 } //namespace ORB_SLAM
